@@ -77,7 +77,7 @@ const students = [
         gender: 'Male',
         dob: '2001-08-18',
         contactDetails: 'james@example.com',
-        feesPaid: 160,
+        feesPaid: 16,
         classId: 1
     },
     {
