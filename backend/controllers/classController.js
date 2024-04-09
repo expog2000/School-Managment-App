@@ -1,6 +1,7 @@
 const express = require('express');
 const Class = require('../models/classSchema');
 const Teacher = require('../models/teacherSchema');
+const Student=require('../models/studentSchema')
 
 const router = express.Router();
 
@@ -8,24 +9,15 @@ const registerClass = async (req, res) => {
     try {
         const { className, year, studentFees } = req.body;
 
-        // Check if the teacher exists
-        // const existingTeacher = await Teacher.findById(teacher);
-
-        // if (!existingTeacher) {
-        //     return res.status(400).json({ error: 'Invalid teacherId', message: 'The specified teacher does not exist' });
-        // }
-
-        // Create a new class document
         const newClass = new Class({
             className,
             year,
             studentFees
         });
 
-        // Save the class document to the database
+       
         const savedClass = await newClass.save();
 
-        // Return the saved class data as a response
         res.status(201).json(savedClass);
     } catch (error) {
         console.error(error);
@@ -33,23 +25,53 @@ const registerClass = async (req, res) => {
     }
 };
 
-const getClassWithStudents = async (req, res) => {
-    try {
-        // Find the class document by its ID
-        const classId = req.params.classId; // Assuming classId is passed as a route parameter
-        const foundClass = await Class.findById(classId).populate('studentList');
 
-        // Check if the class exists
+
+const getAllStudentsInClass = async (req, res) => {
+    try {
+        
+        const className = req.body.className;
+        
+        const foundClass = await Class.findOne({ className });
         if (!foundClass) {
             return res.status(404).json({ error: 'Class not found', message: 'The specified class does not exist' });
         }
+        const studentIds = foundClass.studentList;
+        const students = await Student.find({ _id: { $in: studentIds } });
+        const studentNames = students.map(student => student.name);
 
-        // Return the class document with populated studentList
-        res.status(200).json(foundClass);
+        res.status(200).json(studentNames);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
 
-module.exports = registerClass ;
+const deleteClass = async (req, res) => {
+    try {
+        
+        const className = req.body.className;
+
+        const deletedClass = await Class.findOne({ className });
+
+        if (!deletedClass) {
+            return res.status(404).json({ error: 'Class not found', message: 'The specified class does not exist' });
+        }
+
+       
+        await Student.updateMany({ className: deletedClass._id }, { $set: { className: null } });
+        await Teacher.updateMany({ className: deletedClass._id }, { $set: { className: null } });
+
+        
+        await Class.findOneAndDelete({ className });
+
+       
+        res.status(200).json(deletedClass);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
+module.exports = { registerClass, getAllStudentsInClass,deleteClass };

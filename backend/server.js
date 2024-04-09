@@ -4,6 +4,7 @@ const students=require('./data/students')
 const studentRoute = require('./routes/studentRoutes');
 
 const classRoute = require('./routes/classRoutes');
+const teacherRoute = require('./routes/teacherRoutes');
 
 
 console.log(students)
@@ -28,4 +29,6 @@ app.get('/api/students', (req, res) => {
 
 app.use('/api/student', studentRoute);
 app.use('/api/class', classRoute);
+app.use('/api/teacher',teacherRoute);
+
 app.listen(process.env.PORT,console.log("serverconnected"))

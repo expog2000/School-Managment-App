@@ -1,15 +1,10 @@
-
 const Class = require('../models/classSchema');
 const Student = require('../models/studentSchema');
-
-
-
 
 const registerStudent = async (req, res) => {
     try {
         const { name, contact, gender, className, DOB, feesPaid } = req.body;
 
-        // Validate that the className corresponds to an existing class
         const existingClass = await Class.findOne({ className });
 
         if (!existingClass) {
@@ -27,7 +22,11 @@ const registerStudent = async (req, res) => {
 
         const savedStudent = await newStudent.save();
 
-        // Return the saved student data as a response
+        
+        existingClass.studentList.push(savedStudent._id);
+        await existingClass.save();
+
+
         res.status(201).json(savedStudent);
     } catch (error) {
         console.error(error);
