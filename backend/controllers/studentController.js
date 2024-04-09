@@ -1,9 +1,38 @@
-const registerStudent=async (req,res)=>{
-    const {name,contact}=req.body;
 
-    res.json({
-        name,
-        contact,
-    });
+const Class = require('../models/classSchema');
+const Student = require('../models/studentSchema');
+
+
+
+
+const registerStudent = async (req, res) => {
+    try {
+        const { name, contact, gender, className, DOB, feesPaid } = req.body;
+
+        // Validate that the className corresponds to an existing class
+        const existingClass = await Class.findOne({ className });
+
+        if (!existingClass) {
+            return res.status(400).json({ error: 'Invalid className', message: 'The specified class does not exist' });
+        }
+
+        const newStudent = new Student({
+            name,
+            contact,
+            gender,
+            className: existingClass._id,
+            DOB,
+            feesPaid
+        });
+
+        const savedStudent = await newStudent.save();
+
+        // Return the saved student data as a response
+        res.status(201).json(savedStudent);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 };
-module.exports=registerStudent;
+
+module.exports = registerStudent;

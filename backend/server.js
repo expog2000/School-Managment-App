@@ -3,6 +3,9 @@ const express=require('express')
 const students=require('./data/students')
 const studentRoute = require('./routes/studentRoutes');
 
+const classRoute = require('./routes/classRoutes');
+
+
 console.log(students)
 const app = express();
 const dotenv = require('dotenv');
@@ -24,5 +27,5 @@ app.get('/api/students', (req, res) => {
 });
 
 app.use('/api/student', studentRoute);
-
+app.use('/api/class', classRoute);
 app.listen(process.env.PORT,console.log("serverconnected"))
