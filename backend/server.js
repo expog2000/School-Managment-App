@@ -1,5 +1,5 @@
 const express=require('express')
-
+const cors = require('cors');
 const students=require('./data/students')
 const studentRoute = require('./routes/studentRoutes');
 
@@ -15,7 +15,7 @@ const connectDB = require('./config/db');
 dotenv.config();
 connectDB();
 
-
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 
 app.get('/', (req, res) => {

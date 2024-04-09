@@ -31,6 +31,7 @@ const getAllStudentsInClass = async (req, res) => {
     try {
         
         const className = req.body.className;
+        console.log("claas",className)
         
         const foundClass = await Class.findOne({ className });
         if (!foundClass) {
@@ -49,29 +50,29 @@ const getAllStudentsInClass = async (req, res) => {
 
 const deleteClass = async (req, res) => {
     try {
-        
-        const className = req.body.className;
+        const classId = req.body.classId; // Assuming classId is passed in the request body
 
-        const deletedClass = await Class.findOne({ className });
+        // Find the class document by its _id
+        const deletedClass = await Class.findById(classId);
 
         if (!deletedClass) {
             return res.status(404).json({ error: 'Class not found', message: 'The specified class does not exist' });
         }
 
-       
+        // Update all related students and teachers to remove reference to this class
         await Student.updateMany({ className: deletedClass._id }, { $set: { className: null } });
         await Teacher.updateMany({ className: deletedClass._id }, { $set: { className: null } });
 
-        
-        await Class.findOneAndDelete({ className });
+        // Delete the class document
+        await Class.findByIdAndDelete(classId);
 
-       
         res.status(200).json(deletedClass);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
 
 
 module.exports = { registerClass, getAllStudentsInClass,deleteClass };
