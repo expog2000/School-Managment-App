@@ -33,5 +33,17 @@ const registerStudent = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+const getTotalFeesPaid = async (req, res) => {
+    try {
+    
+        const allStudents = await Student.find();
 
-module.exports = registerStudent;
+        const totalFeesPaid = allStudents.reduce((acc, student) => acc + student.feesPaid, 0);
+
+        res.status(200).json({ totalFeesPaid });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+module.exports = {registerStudent,getTotalFeesPaid};

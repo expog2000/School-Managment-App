@@ -33,4 +33,19 @@ const registerTeacher = async (req, res) => {
     }
 };
 
-module.exports = registerTeacher;
+const getTotalSalary = async (req, res) => {
+    try {
+    
+        const allTeachers = await Teacher.find();
+
+
+        const totalSalary = allTeachers.reduce((acc, teacher) => acc + teacher.salary, 0);
+
+        res.status(200).json({ totalSalary });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+module.exports = {registerTeacher,getTotalSalary};
