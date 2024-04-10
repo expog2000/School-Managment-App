@@ -52,7 +52,8 @@ const getAllClasses = async (req, res) => {
     try {
       
         const allClasses = await Class.find();
-        
+        console.log("class",allClasses)
+
         res.status(200).json({ classes: allClasses });
     } catch (error) {
         console.error(error);

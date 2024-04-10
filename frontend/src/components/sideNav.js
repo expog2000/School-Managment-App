@@ -21,7 +21,7 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import schoolImage from '../assets/school.jpg'; 
 import HomeIcon from '@mui/icons-material/Home';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 
 
 
@@ -95,6 +95,7 @@ export default function SideNav() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
 
   const handleDrawerOpen = () => {
@@ -196,14 +197,16 @@ export default function SideNav() {
           ))}
         </List>
       </Drawer>
-      <Box component="main" className="flex flex-grow p-3">
-      <DrawerHeader />
-      <img
-        src={schoolImage}
-        alt="School"
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-    </Box>
+      {location.pathname === '/' && (
+        <Box component="main" className="flex flex-grow p-3">
+          <DrawerHeader />
+          <img
+            src={schoolImage}
+            alt="School"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </Box>
+      )}
 
     </Box>
   );
