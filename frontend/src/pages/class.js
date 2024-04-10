@@ -3,15 +3,20 @@ import React, { useEffect, useState } from 'react';
 import Card from '../components/classCard';
 import classService from '../services/http/class';
 
+import ClassDetailCard from '../components/classDetailCard';
+import { useNavigate,useLocation } from 'react-router-dom';
+
 
 const Class = () => {
   const [classData, setClassData] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchClass = async () => {
       try {
        
         const response = await classService.getClass();
+        localStorage.setItem('classData', JSON.stringify(response.classes));
         setClassData(response.classes);
       } catch (error) {
         console.error('Error fetching Class:', error);
@@ -24,9 +29,12 @@ const Class = () => {
   
   useEffect(() => {
     console.log("Updated classData:", classData);
+    
   }, [classData]); 
   const handleClassDetailClick = (classItem) => {
-
+    localStorage.removeItem('classItem');
+    localStorage.setItem('classItem', JSON.stringify(classItem));
+    navigate('/class-detail');
     console.log('Class detail button clicked for:', classItem);
   };
   

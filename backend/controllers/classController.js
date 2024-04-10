@@ -29,25 +29,38 @@ const registerClass = async (req, res) => {
 
 const getAllStudentsInClass = async (req, res) => {
     try {
+     
+        console.log("Query Parameters:", req.query);
+        const { className } = req.query;
+        console.log("className:", className);
         
-        const className = req.body.className;
-        console.log("claas",className)
         
         const foundClass = await Class.findOne({ className });
+
+        
         if (!foundClass) {
             return res.status(404).json({ error: 'Class not found', message: 'The specified class does not exist' });
         }
-        const studentIds = foundClass.studentList;
-        const students = await Student.find({ _id: { $in: studentIds } });
-        const studentNames = students.map(student => student.name);
 
-        res.status(200).json(studentNames);
+        
+        const studentIds = foundClass.studentList;
+
+        const students = await Student.find({ _id: { $in: studentIds } });
+
+
+        const studentDetails = students.map(student => ({
+            name: student.name,
+            gender: student.gender
+        }));
+
+
+        res.status(200).json(studentDetails);
     } catch (error) {
+       
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
-
 const getAllClasses = async (req, res) => {
     try {
       
