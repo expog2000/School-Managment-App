@@ -20,6 +20,9 @@ import SchoolIcon from '@mui/icons-material/School';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import schoolImage from '../assets/school.jpg'; 
+import HomeIcon from '@mui/icons-material/Home';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const drawerWidth = 240;
@@ -91,6 +94,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function SideNav() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -98,6 +103,17 @@ export default function SideNav() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+  const handleListItemClick = (text) => {
+    if (text === 'Classes') {
+        navigate('/classes');
+    } else if (text === 'Analytics') {
+        navigate('/analytics');
+    }
+    else if(text==='Home')
+    {
+        navigate('/')
+    }
   };
 
   return (
@@ -132,10 +148,11 @@ export default function SideNav() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Classes', 'Analytics'].map((text, index) => (
+          {['Home','Classes', 'Analytics'].map((text, index) => (
             <ListItem key={text} disablePadding className="block">
               <ListItemButton
                 className={`min-h-12 ${open ? 'justify-between' : 'justify-center'} px-10`}
+                onClick={() => handleListItemClick(text)}
               >
                 <ListItemIcon
                   sx={{
@@ -144,7 +161,9 @@ export default function SideNav() {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <SchoolIcon /> : <CalculateIcon />}
+                  {text === 'Home' && <HomeIcon />}
+                    {text === 'Classes' && <SchoolIcon />}
+                    {text === 'Analytics' && <CalculateIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

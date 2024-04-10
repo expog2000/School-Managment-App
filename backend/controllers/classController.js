@@ -48,9 +48,21 @@ const getAllStudentsInClass = async (req, res) => {
     }
 };
 
+const getAllClasses = async (req, res) => {
+    try {
+      
+        const allClasses = await Class.find();
+        
+        res.status(200).json({ classes: allClasses });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 const deleteClass = async (req, res) => {
     try {
-        const classId = req.body.classId; // Assuming classId is passed in the request body
+        const classId = req.body.classId;
 
        
         const deletedClass = await Class.findById(classId);
@@ -73,4 +85,4 @@ const deleteClass = async (req, res) => {
 
 
 
-module.exports = { registerClass, getAllStudentsInClass,deleteClass };
+module.exports = { registerClass, getAllStudentsInClass,deleteClass,getAllClasses };

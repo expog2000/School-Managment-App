@@ -1,8 +1,9 @@
 
 import './App.css';
 import SideNav from './components/sideNav';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import AddClass from './pages/classes/addClass';
+
 
 
 
@@ -10,7 +11,10 @@ import AddClass from './pages/classes/addClass';
 function App() {
   return (
     <div className="App">
-      <SideNav/>
+      <Router>
+          <SideNav/>
+      </Router>
+      
     </div>
   );
 }
