@@ -1,7 +1,7 @@
 import React from 'react';
 
 const StudentCard = ({ name, DOB, feesPaid, onStudentDetailClick }) => {
-    console.log("name",name)
+    
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-blue-200">
       <div className="px-6 py-4">
