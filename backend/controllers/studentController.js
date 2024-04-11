@@ -10,6 +10,7 @@ const registerStudent = async (req, res) => {
         if (!existingClass) {
             return res.status(400).json({ error: 'Invalid className', message: 'The specified class does not exist' });
         }
+        console.log("e1",existingClass)
 
         const newStudent = new Student({
             name,
@@ -46,4 +47,34 @@ const getTotalFeesPaid = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
-module.exports = {registerStudent,getTotalFeesPaid};
+const getAllStudents = async (req, res) => {
+    try {
+      
+        const allStudents = await Student.find();
+        console.log("student",allStudents)
+
+        res.status(200).json({ students: allStudents });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+const deleteStudent = async (req, res) => {
+    try {
+        const studentId = req.body.studentId;
+        const deletedStudent = await Student.findById(studentId);
+
+        if (!deletedStudent) {
+            return res.status(404).json({ error: 'Student not found', message: 'The specified student does not exist' });
+        }
+
+        await Student.findByIdAndDelete(studentId);
+
+        res.status(200).json({ message: 'Student deleted successfully', deletedStudent });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+module.exports = {registerStudent,getTotalFeesPaid,getAllStudents,deleteStudent};

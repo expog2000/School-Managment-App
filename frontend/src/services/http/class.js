@@ -1,6 +1,17 @@
 import axios from 'axios';
 
 class ClassService {
+    async registerClass(classData) {
+        try {
+            
+            const response = await axios.post('http://localhost:3005/api/class', classData);
+            console.log("data1", response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error in registerClass:', error.response ? error.response.data : error.message);
+            return []; 
+        }
+    }
     async getClass() {
         try {
             const response = await axios.get('http://localhost:3005/api/class/class-list');
@@ -29,6 +40,20 @@ class ClassService {
         } catch (error) {
           console.error('Error in getStudent:');
           return []; 
+        }
+    }
+    async deleteClass(classId) {
+        try {
+            console.log("id1",classId)
+            
+            const response = await axios.delete('http://localhost:3005/api/class/delete', {
+                data:{
+                    classId:classId}});
+            console.log("data1", response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error in registerClass:', error.response ? error.response.data : error.message);
+            return []; 
         }
     }
 }

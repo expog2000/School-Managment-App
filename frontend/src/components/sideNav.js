@@ -115,6 +115,14 @@ export default function SideNav() {
     {
         navigate('/')
     }
+    else if(text==='Student')
+    {
+        navigate('/student')
+    }
+    else if(text==='Teacher')
+    {
+        navigate('/teacher')
+    }
   };
 
   return (
@@ -135,8 +143,8 @@ export default function SideNav() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" className="flex-grow text-center">
-  School Management App
-</Typography>
+                 School Management App
+          </Typography>
 
 
         </Toolbar>
@@ -181,6 +189,7 @@ export default function SideNav() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                onClick={() => handleListItemClick(text)}
               >
                 <ListItemIcon
                   sx={{

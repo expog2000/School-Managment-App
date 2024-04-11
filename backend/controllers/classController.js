@@ -50,7 +50,13 @@ const getAllStudentsInClass = async (req, res) => {
 
         const studentDetails = students.map(student => ({
             name: student.name,
-            gender: student.gender
+            gender: student.gender,
+            contact: student.contact,
+            DOB: student.DOB,
+            feesPaid: student.feesPaid
+
+
+
         }));
 
 
@@ -77,8 +83,6 @@ const getAllClasses = async (req, res) => {
 const deleteClass = async (req, res) => {
     try {
         const classId = req.body.classId;
-
-       
         const deletedClass = await Class.findById(classId);
 
         if (!deletedClass) {

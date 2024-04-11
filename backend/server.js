@@ -1,13 +1,11 @@
 const express=require('express')
 const cors = require('cors');
-const students=require('./data/students')
 const studentRoute = require('./routes/studentRoutes');
 
 const classRoute = require('./routes/classRoutes');
 const teacherRoute = require('./routes/teacherRoutes');
 
 
-console.log(students)
 const app = express();
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
