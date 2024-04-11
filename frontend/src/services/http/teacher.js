@@ -23,6 +23,16 @@ class TeacherService {
             return []; 
         }
     }
+    async getTeacherSalary() {
+        try {
+            const response = await axios.get('http://localhost:3005/api/teacher/total-salary');
+            console.log("data1", response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error in getTeacher:', error);
+            return []; 
+        }
+    }
     
     async deleteTeacher(teacherId) {
         try {

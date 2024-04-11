@@ -13,6 +13,8 @@ import AddStudent from './pages/addStudent';
 import Teachers from './pages/teacher';
 import TeacherDetailCard from './components/teacherDeailCard';
 import AddTeacher from './pages/addTeacher';
+import FinancialSummary from './pages/financialSummary';
+
 
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
           <Route path="/teacher" element={<Teachers/>} />
           <Route path="/teacher-detail" element={<TeacherDetailCard/>} />
           <Route path="/add-teacher" element={<AddTeacher/>} />
+          <Route path="/analytics" element={<FinancialSummary/>} />
         </Routes>
       </Router>
       

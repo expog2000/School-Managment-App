@@ -38,6 +38,16 @@ class StudentService {
             return []; 
         }
     }
+    async getStudentSalary() {
+        try {
+            const response = await axios.get('http://localhost:3005/api/student/total-fees');
+            console.log("data1", response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error in getStudentSalary:', error);
+            return []; 
+        }
+    }
 }
 
 const studentService = new StudentService();
