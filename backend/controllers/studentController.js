@@ -77,4 +77,40 @@ const deleteStudent = async (req, res) => {
     }
 };
 
-module.exports = {registerStudent,getTotalFeesPaid,getAllStudents,deleteStudent};
+
+const updateStudentDetails = async (req, res) => {
+    try {
+        const { studentId } = req.body; 
+        const updates = {}; 
+        const updatableFields = ['name', 'DOB', 'contact', 'className'];
+       
+        updatableFields.forEach(field => {
+            if (req.body[field] !== undefined) {
+                updates[field] = req.body[field];
+            }
+        });
+
+        if (Object.keys(updates).length === 0) {
+          
+            return res.status(400).json({ error: 'No valid fields provided for update' });
+        }
+
+        const updatedStudent = await Student.findByIdAndUpdate(studentId, updates, { new: true });
+
+        if (!updatedStudent) {
+            return res.status(404).json({ error: 'Student not found', message: 'The specified student does not exist' });
+        }
+
+    
+        res.status(200).json({ message: 'Student updated successfully', student: updatedStudent });
+
+    } catch (error) {
+        console.error("Error updating student details:", error);
+        res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
+};
+
+
+
+
+module.exports = {registerStudent,getTotalFeesPaid,getAllStudents,deleteStudent,updateStudentDetails};

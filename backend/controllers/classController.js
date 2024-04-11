@@ -100,7 +100,40 @@ const deleteClass = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+const updateClassDetails = async (req, res) => {
+    try {
+        const { classId } = req.body; 
+        const updates = {}; 
+        const updatableFields = ['className', 'year', 'studentFees']; 
+
+       t
+        updatableFields.forEach(field => {
+            if (req.body[field] !== undefined) { 
+                updates[field] = req.body[field];
+            }
+        });
+
+        if (Object.keys(updates).length === 0) {
+           
+            return res.status(400).json({ error: 'No valid fields provided for update' });
+        }
+
+       
+        const updatedClass = await Class.findByIdAndUpdate(classId, updates, { new: true });
+
+        if (!updatedClass) {
+            return res.status(404).json({ error: 'Class not found', message: 'The specified class does not exist' });
+        }
+
+      
+        res.status(200).json({ message: 'Class updated successfully', class: updatedClass });
+
+    } catch (error) {
+        console.error("Error updating class details:", error);
+        res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
+};
 
 
 
-module.exports = { registerClass, getAllStudentsInClass,deleteClass,getAllClasses };
+module.exports = { registerClass, getAllStudentsInClass,deleteClass,getAllClasses,updateClassDetails };

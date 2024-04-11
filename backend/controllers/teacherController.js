@@ -82,5 +82,40 @@ const deleteTeacher = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+const updateTeacherDetails = async (req, res) => {
+    try {
+        const { teacherId } = req.body;
 
-module.exports = {registerTeacher,getTotalSalary,getAllTeacher,deleteTeacher};
+        let updates = {};
+
+       
+        const updatableFields = ['name', 'salary', 'className'];
+
+        
+        updatableFields.forEach(field => {
+            if (req.body[field] !== undefined) { 
+                updates[field] = req.body[field];
+            }
+        });
+
+        
+        if (Object.keys(updates).length === 0) {
+            return res.status(400).json({ error: 'No valid fields provided for update' });
+        }
+
+        
+        const updatedTeacher = await Teacher.findByIdAndUpdate(teacherId, updates, { new: true }); 
+
+        if (!updatedTeacher) {
+            return res.status(404).json({ error: 'Teacher not found', message: 'The specified teacher does not exist' });
+        }
+
+        res.status(200).json({ message: 'Teacher updated successfully', teacher: updatedTeacher });
+
+    } catch (error) {
+        console.error("Error updating teacher's details:", error);
+        res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
+};
+
+module.exports = {registerTeacher,getTotalSalary,getAllTeacher,deleteTeacher,updateTeacherDetails};

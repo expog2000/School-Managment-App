@@ -1,5 +1,5 @@
 const express = require('express');
-const {registerClass,getAllStudentsInClass,deleteClass,getAllClasses} = require('../controllers/classController');
+const {registerClass,getAllStudentsInClass,deleteClass,getAllClasses,updateClassDetails} = require('../controllers/classController');
 
 
 const router = express.Router();
@@ -11,5 +11,7 @@ router.get('/student-list',getAllStudentsInClass)
 router.get('/class-list',getAllClasses);
 
 router.delete('/delete',deleteClass)
+
+router.patch('/update-details', updateClassDetails);
 
 module.exports = router;
