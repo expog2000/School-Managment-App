@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import StudentCard from '../components/studentsCard'; 
-
-
-
-
-
-
 import { useNavigate } from 'react-router-dom';
 import studentService from '../services/http/student';
 
