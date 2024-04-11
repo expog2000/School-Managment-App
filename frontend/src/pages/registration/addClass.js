@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import classService from '../services/http/class';
+import classService from '../../services/http/class';
 import { useNavigate } from 'react-router-dom';
 
 const AddClass = () => {

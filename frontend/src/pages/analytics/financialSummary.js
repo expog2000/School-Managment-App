@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import studentService from '../services/http/student';
-import teacherService from '../services/http/teacher';
+import studentService from '../../services/http/student';
+import teacherService from '../../services/http/teacher';
 
 
 const FinancialSummary = () => {

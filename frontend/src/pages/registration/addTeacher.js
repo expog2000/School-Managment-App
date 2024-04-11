@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import teacherService from '../services/http/teacher';
+import teacherService from '../../services/http/teacher';
 
 
 const AddTeacher = () => {

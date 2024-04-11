@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import studentService from '../services/http/student';
+import studentService from '../../services/http/student';
 
 const AddStudent = () => {
     const [studentDetails, setStudentDetails] = useState({

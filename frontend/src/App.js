@@ -6,14 +6,14 @@ import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 import Class from './pages/class';
 import ClassDetailCard from './components/classDetailCard';
 import StudentList from './components/studentList';
-import AddClass from './pages/addClass';
+import AddClass from './pages/registration/addClass';
 import Students from './pages/students';
 import StudentDetailCard from './components/studentDetailCard';
-import AddStudent from './pages/addStudent';
+import AddStudent from './pages/registration/addStudent';
 import Teachers from './pages/teacher';
 import TeacherDetailCard from './components/teacherDeailCard';
-import AddTeacher from './pages/addTeacher';
-import FinancialSummary from './pages/financialSummary';
+import AddTeacher from './pages/registration/addTeacher';
+import FinancialSummary from './pages/analytics/financialSummary';
 
 
 
