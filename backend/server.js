@@ -13,7 +13,7 @@ const connectDB = require('./config/db');
 dotenv.config();
 connectDB();
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'https://school-managment-app.vercel.app' }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
