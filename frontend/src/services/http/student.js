@@ -40,7 +40,7 @@ class StudentService {
     }
     async getStudentSalary() {
         try {
-            const response = await axios.get('https://backend-2-8rr7.onrender.com/student/total-fees');
+            const response = await axios.get('https://backend-2-8rr7.onrender.com/api/student/total-fees');
             console.log("data1", response.data);
             return response.data;
         } catch (error) {
