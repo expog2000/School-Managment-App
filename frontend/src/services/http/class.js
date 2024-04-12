@@ -4,7 +4,7 @@ class ClassService {
     async registerClass(classData) {
         try {
             
-            const response = await axios.post('http://localhost:3005/api/class', classData);
+            const response = await axios.post('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/class', classData);
             console.log("data1", response.data);
             return response.data;
         } catch (error) {
@@ -14,7 +14,7 @@ class ClassService {
     }
     async getClass() {
         try {
-            const response = await axios.get('http://localhost:3005/api/class/class-list');
+            const response = await axios.get('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/class/class-list');
             console.log("data1", response.data);
             return response.data;
         } catch (error) {
@@ -30,7 +30,7 @@ class ClassService {
         console.log("class",classData.className)
         
         
-        const response = await axios.get('http://localhost:3005/api/class/student-list', {
+        const response = await axios.get('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/class/student-list', {
             params: {
                 className: classData.className
               }
@@ -46,7 +46,7 @@ class ClassService {
         try {
             console.log("id1",classId)
             
-            const response = await axios.delete('http://localhost:3005/api/class/delete', {
+            const response = await axios.delete('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/class/delete', {
                 data:{
                     classId:classId}});
             console.log("data1", response.data);
