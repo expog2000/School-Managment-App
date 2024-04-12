@@ -5,7 +5,7 @@ class StudentService {
         try {
             console.log("data4",studentData)
             
-            const response = await axios.post('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/student', studentData);
+            const response = await axios.post('https://backend-2-8rr7.onrender.com/api/student', studentData);
             console.log("data1", response.data);
             return response.data;
         } catch (error) {
@@ -15,7 +15,7 @@ class StudentService {
     }
     async getStudents() {
         try {
-            const response = await axios.get('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/student/student-list');
+            const response = await axios.get('https://backend-2-8rr7.onrender.com/api/student/student-list');
             console.log("data1", response.data);
             return response.data;
         } catch (error) {
@@ -28,7 +28,7 @@ class StudentService {
         try {
             console.log("id1",studentId)
             
-            const response = await axios.delete('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/student/delete', {
+            const response = await axios.delete('https://backend-2-8rr7.onrender.com/api/student/delete', {
                 data:{
                     studentId:studentId}});
             console.log("data1", response.data);
@@ -40,7 +40,7 @@ class StudentService {
     }
     async getStudentSalary() {
         try {
-            const response = await axios.get('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/student/total-fees');
+            const response = await axios.get('https://backend-2-8rr7.onrender.com/student/total-fees');
             console.log("data1", response.data);
             return response.data;
         } catch (error) {

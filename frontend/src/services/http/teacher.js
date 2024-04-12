@@ -5,7 +5,7 @@ class TeacherService {
         try {
             console.log("data4",teacherData)
             
-            const response = await axios.post('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/teacher', teacherData);
+            const response = await axios.post('https://backend-2-8rr7.onrender.com/api/teacher', teacherData);
             console.log("data1", response.data);
             return response.data;
         } catch (error) {
@@ -15,7 +15,7 @@ class TeacherService {
     }
     async getTeacher() {
         try {
-            const response = await axios.get('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/teacher/teacher-list');
+            const response = await axios.get('https://backend-2-8rr7.onrender.com/api/teacher/teacher-list');
             console.log("data1", response.data);
             return response.data;
         } catch (error) {
@@ -25,7 +25,7 @@ class TeacherService {
     }
     async getTeacherSalary() {
         try {
-            const response = await axios.get('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/teacher/total-salary');
+            const response = await axios.get('https://backend-2-8rr7.onrender.com/api/teacher/total-salary');
             console.log("data1", response.data);
             return response.data;
         } catch (error) {
@@ -38,7 +38,7 @@ class TeacherService {
         try {
             console.log("id8",teacherId)
             
-            const response = await axios.delete('https://ba43-2402-e280-219a-2de-b585-d1f3-44d0-f2c3.ngrok-free.app/api/teacher/delete', {
+            const response = await axios.delete('https://backend-2-8rr7.onrender.com/api/teacher/delete', {
                 data:{
                     teacherId:teacherId}});
             console.log("data1", response.data);
